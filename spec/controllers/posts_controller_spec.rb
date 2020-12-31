@@ -13,4 +13,17 @@ RSpec.describe PostsController do
       expect(response).to render_template('index')
     end
   end
+
+  describe 'GET new' do
+    it 'Assigns @post' do
+      post = Post.new
+      get :new
+      expect(assigns(:post).id).to eq(post.id)
+    end
+
+    it 'Renders the new template' do
+      get :new
+      expect(response).to render_template('new')
+    end
+  end
 end
