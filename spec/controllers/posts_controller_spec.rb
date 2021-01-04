@@ -41,6 +41,20 @@ RSpec.describe PostsController do
     end
   end
 
+  describe 'GET show' do
+    it 'Assigns @post' do
+      post = Post.create(title: 'Title', body: 'Body')
+      get :show, params: { id: post.id }
+      expect(assigns(:post)).to eq(post)
+    end
+
+    it 'Renders the show template' do
+      post = Post.create(title: 'Title', body: 'Body')
+      get :show, params: { id: post.id }
+      expect(response).to render_template('show')
+    end
+  end
+
   describe 'GET edit' do
     it 'Assigns @post' do
       post = Post.create(title: 'Title', body: 'Body')
