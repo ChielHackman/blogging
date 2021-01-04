@@ -68,4 +68,12 @@ RSpec.describe PostsController do
       expect(Post.find(post.id).title).to eq('Title')
     end
   end
+
+  describe 'DELETE destroy' do
+    it 'Destroy a post' do
+      post = Post.create(title: 'Title', body: 'Body')
+      delete :destroy, params: { id: post.id }
+      expect(Post.count).to eq(0)
+    end
+  end
 end
