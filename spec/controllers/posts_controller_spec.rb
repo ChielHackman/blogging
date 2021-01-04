@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PostsController do
   describe 'GET index' do
     it 'Assigns @posts' do
-      post = Post.create
+      post = Post.create(title: 'Title', body: 'Body')
       get :index
       expect(assigns(:posts)).to eq([post])
     end
@@ -24,6 +24,20 @@ RSpec.describe PostsController do
     it 'Renders the new template' do
       get :new
       expect(response).to render_template('new')
+    end
+  end
+
+  describe 'POST create' do
+    it 'Saves a valid post' do
+      post_count = Post.count
+      post :create, params: { post: { title: 'Title', body: 'Body' } }
+      expect(Post.count).to eq(post_count + 1)
+    end
+
+    it 'Does not saves a invalid post' do
+      post_count = Post.count
+      post :create, params: { post: { title: 'Title' } }
+      expect(Post.count).to eq(post_count)
     end
   end
 end
