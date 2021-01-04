@@ -54,4 +54,18 @@ RSpec.describe PostsController do
       expect(response).to render_template('edit')
     end
   end
+
+  describe 'PUT update' do
+    it 'Updates a valid post' do
+      post = Post.create(title: 'Title', body: 'Body')
+      put :update, params: { id: post.id, post: { title: 'New title' } }
+      expect(Post.find(post.id).title).to eq('New title')
+    end
+
+    it 'Does not update a invalid post' do
+      post = Post.create(title: 'Title', body: 'Body')
+      put :update, params: { id: post.id, post: { title: nil } }
+      expect(Post.find(post.id).title).to eq('Title')
+    end
+  end
 end
