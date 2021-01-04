@@ -30,8 +30,9 @@ gem 'haml-rails', '~> 2.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
-  gem 'rspec-rails', '~> 4.0.1'
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 4.0.1'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
